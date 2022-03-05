@@ -14,7 +14,12 @@ export function Main() {
   const [address, setAddress] = useState<Address>();
 
   function handleValidateZipCode() {
-    axios.get(`https://viacep.com.br/ws/${zipCode}/json/`).then(response => {
+    const formatedZipCode = zipCode.replace(/[^0-9]/g, '')
+
+    if(formatedZipCode.length !== 8) {
+      return;
+    }
+    axios.get(`https://viacep.com.br/ws/${formatedZipCode}/json/`).then(response => {
       setAddress(response.data);
     });
   }
@@ -32,18 +37,23 @@ export function Main() {
           onBlur={handleValidateZipCode}
         />
       </label>
-      <label htmlFor="">
-        <input type="text" defaultValue={address?.logradouro} />
-      </label>
-      <label htmlFor="">
-        <input type="text" defaultValue={address?.bairro} />
-      </label>
-      <label htmlFor="">
-        <input type="text" defaultValue={address?.localidade} />
-      </label>
-      <label htmlFor="">
-        <input type="text" defaultValue={address?.uf} />
-      </label>
+      {address &&
+      <>
+        <label htmlFor="">
+          <input type="text" defaultValue={address?.logradouro} />
+        </label>
+        <label htmlFor="">
+          <input type="text" defaultValue={address?.bairro} />
+        </label>
+        <label htmlFor="">
+          <input type="text" defaultValue={address?.localidade} />
+        </label>
+        <label htmlFor="">
+          <input type="text" defaultValue={address?.uf} />
+        </label>
+      
+      </>
+      }
     </Container>
   );
 }
