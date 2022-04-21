@@ -11,5 +11,6 @@ Projeto para estudo do uso da dependência AXIOS e prática do AJAX.
 
 * [ReactJS](https://reactjs.org/)
 * [Typescript](https://www.typescriptlang.org/)
+* [Axios](https://axios-http.com/ptbr/docs/intro)
 
 
